@@ -1,0 +1,117 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+html, body {
+    height: 100%;
+}
+
+body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background-color: #f4f4f4;
+}
+
+main {
+    display: flex;
+    width: 100%;
+    height: 100vh;
+}
+
+.imagem-formulario {
+    flex: 1;
+    overflow: hidden;
+}
+
+.imagem-formulario img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.formulario {
+    flex: 1;
+    background-color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px;
+}
+
+.box {
+    width: 80%;
+    max-width: 400px;
+}
+
+.form-box h2 {
+    font-size: 1.8rem;
+    margin-bottom: 20px;
+    color: #333;
+    text-align: center;
+    font-family: "salt", sans-serif;
+}
+
+.form-box form {
+    display: flex;
+    flex-direction: column;
+}
+
+.input-group {
+    margin-bottom: 15px;
+}
+
+.input-group label {
+    font-size: 0.9rem;
+    color: #666;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 10px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-top: 5px;
+}
+
+.input-group input:focus {
+    border-color: #003cff;
+    outline: none;
+}
+
+a {
+    font-size: 0.85rem;
+    color: #003cff;
+    text-decoration: none;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+.button-group.entrar input {
+    width: 100%;
+    padding: 10px;
+    font-size: 1rem;
+    background-color: #003cff;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    cursor: pointer;
+}
+
+.button-group.entrar input:hover {
+    background-color: #1d4ade;
+}
+
+@font-face {
+    font-family: salt;
+    src: url(HoneySalt.otf);
+  }
