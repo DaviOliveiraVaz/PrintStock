@@ -28,6 +28,37 @@ app.get("/", function (req, res) {
   res.render("login.ejs", {});
 });
 
+app.post("/", async (req, res) => {
+  const { email, senha } = req.body;
+
+  try {
+    const usuario = await Usuario.findOne({ email });
+
+    if (!usuario) {
+      return res.send(
+        `<script>alert("Cadastro não encontrado."); window.history.back();</script>`
+      );
+    }
+
+    const match = await bcrypt.compare(senha, usuario.senha);
+
+    if (match) {
+      req.session.id_usuario = usuario._id;
+      req.session.email = usuario.email;
+      return res.redirect("/home");
+    } else {
+      return res.send(
+        `<script>alert("E-mail ou senha incorretos."); window.history.back();</script>`
+      );
+    }
+  } catch (error) {
+    console.error("Erro ao consultar o banco de dados: ", error);
+    return res.status(500).send(
+      `<script>alert("Ocorreu um erro ao consultar o banco de dados."); window.history.back();</script>`
+    );
+  }
+});
+
 app.get("/cadastro", function (req, res) {
   res.render("cadastro.ejs", {});
 });
@@ -48,6 +79,74 @@ app.post('/cadastro', async function(req, res){
   } catch (err) {
     res.send("Erro ao salvar o usuário: " + err);
   }
+});
+
+app.get("/sair", (req, res) => {
+  req.session.destroy((err) => {
+    if (err) {
+      console.error("Erro ao finalizar a sessão:", err);
+      return res
+        .status(500)
+        .send(
+          `<script>alert("Ocorreu um erro ao sair da conta."); window.history.back();</script>`
+        );
+    }
+    res.redirect("/");
+  });
+});
+
+app.get('/deletar-funcionario/:id', function(req, res){
+  try {
+    const id_usuario = req.session.id_usuario;
+
+    if (!id_usuario) {
+      return res.redirect("/");
+    }
+
+  Usuario.findByIdAndDelete(req.params.id, function(err, docs){
+      if(err){
+          res.send("Aconteceu o seguinte erro: " + err);
+      } else{
+          res.redirect("/");
+      };
+  });
+
+  }catch (error) {
+    console.error("Erro: ", error);
+    res.status(500).send("Ocorreu um erro ao carregar a página.");
+  }
+});
+
+app.get("/home", function (req, res) {
+  try {
+      const id_usuario = req.session.id_usuario;
+
+      if (!id_usuario) {
+        return res.redirect("/");
+      }
+
+      res.render("home.ejs", {});
+
+  }catch (error) {
+    console.error("Erro: ", error);
+    res.status(500).send("Ocorreu um erro ao carregar os chamados.");
+}
+});
+
+app.get("/perfil", function (req, res) {
+  try {
+      const id_usuario = req.session.id_usuario;
+
+      if (!id_usuario) {
+        return res.redirect("/");
+      }
+
+      res.render("perfil.ejs", {});
+
+  }catch (error) {
+    console.error("Erro: ", error);
+    res.status(500).send("Ocorreu um erro ao carregar os chamados.");
+}
 });
 
 app.listen("3000", function () {
