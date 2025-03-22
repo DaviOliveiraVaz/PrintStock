@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="geral.css">
+  <title>HOME</title>
+</head>
+<body>
+  <header>
+    <div class="top-header">
+        <div class="menu-icon" onclick="toggleMenu()">&#9776;</div>
+        <a href="/sair" class="logout"><img src="sair-icon.png" alt="" width="28px" onclick="return confirm('Tem certeza que deseja sair?')"></a>
+    </div>
+    <nav class="sidebar" id="sidebar">
+        <ul>
+            <li><img src="perfil-icon.png" alt="Ícone de perfil" width="30px"><a href="/perfil"><span class="menu-text">PERFIL</span></a></li>
+            <li><img src="home-icon.png" alt="Ícone de home" width="30px"><a href="/home"><span class="menu-text">HOME</span></a></li>
+            <li><img src="impressora-icon.png" alt="Ícone de impressoras" width="30px"><a href=""><span class="menu-text">IMPRESSORAS</span></a></li>
+            <li><img src="suprimentos-icon.png" alt="Ícone de suprimentos" width="30px"><a href=""><span class="menu-text">SUPRIMENTOS</span></a></li>
+            <li><img src="pecas-icon.png" alt="Ícone de peças" width="30px"><a href=""><span class="menu-text">PEÇAS</span></a></li>
+            <li><img src="equipamentos-icon.png" alt="Ícone de equipamentos" width="30px"><a href=""><span class="menu-text">EQUIPAMENTOS</span></a></li>
+            <li><img src="cadastro-icon.png" alt="Ícone de cadastro" width="30px"><a href="/cadastrar_produto"><span class="menu-text">CADASTRAR PRODUTO</span></a></li>
+        </ul>
+    </nav>
+</header>
+<div class="content">
+  <main>
+    <section class="formulario">
+        <div class="box">
+            <div class="form-box">
+                <h2>CADASTRE SEU PRODUTO</h2>
+                <form method="post" id="form">
+                    <div class="input-group">
+                        <label for="codigo">Código</label>
+                        <input type="text" name="codigo" id="codigo" placeholder="Informe o código do produto" required>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="nome">Nome</label>
+                        <input type="text" name="nome" id=  "nome" placeholder="Informe o nome do produto" required>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="prioridade">Tipo</label>
+                        <select name="tipo" id="tipo" required>
+                          <option value="" disabled selected>Selecione o tipo do produto</option>
+                          <option value="TonerRecarga">Toner Recarga</option>
+                          <option value="TonerLocacao">Toner Locação</option>
+                          <option value="TonerNovo">Toner Novo</option>
+                          <option value="ImpressoraSeminova">Impressora Seminova</option>
+                          <option value="ImpressoraNova">Impressora Nova</option>
+                          <option value="Pecas">Peças</option>
+                          <option value="Equipamentos">Equipamentos</option>
+                        </select>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="quantidade">Quantidade</label>
+                        <input type="number" name="quantidade" id="quantidade" placeholder="Informe a quantidade do produto" required>
+                    </div>
+
+                    <div class="input-group button-group entrar">
+                        <input type="submit" value="Cadastrar" id="env">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+  </main>
+</div>
+  <script>
+    function toggleMenu() {
+            const sidebar = document.getElementById('sidebar');
+            const content = document.querySelector('.content');
+            sidebar.classList.toggle('active');
+            content.classList.toggle('active');
+        }
+  </script>
+</body>
+</html>

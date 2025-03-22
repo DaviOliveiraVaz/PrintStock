@@ -149,6 +149,33 @@ app.get("/perfil", function (req, res) {
 }
 });
 
+app.get("/cadastrar_produto", function (req, res) {
+  res.render("cadastro_produto.ejs", {});
+});
+
+app.post('/cadastrar_produto', async function(req, res){
+  try {
+    const { codigo, nome, tipo, quantidade } = req.body;
+    const produtoExistente = await Produto.findOne({ codigo });
+
+    if (produtoExistente) {
+      return res.send("<script>alert('Erro: Já existe um produto com este código.'); window.history.back();</script>");
+    }
+
+    const produto = new Produto({
+      codigo,
+      nome,
+      tipo,
+      quantidade
+    });
+
+    await produto.save();
+    res.redirect("/home");
+  } catch (err) {
+    res.send("<script>alert('Erro ao salvar o produto: " + err + "'); window.history.back();</script>");
+  }
+});
+
 app.listen("3000", function () {
   console.log("🚀 Servidor rodando na porta 3000!");
 });
