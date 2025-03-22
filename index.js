@@ -150,7 +150,19 @@ app.get("/perfil", function (req, res) {
 });
 
 app.get("/cadastrar_produto", function (req, res) {
-  res.render("cadastro_produto.ejs", {});
+  try {
+    const id_usuario = req.session.id_usuario;
+
+    if (!id_usuario) {
+      return res.redirect("/");
+    }
+
+    res.render("cadastro_produto.ejs", {});
+
+}catch (error) {
+  console.error("Erro: ", error);
+  res.status(500).send("Ocorreu um erro ao carregar os chamados.");
+}
 });
 
 app.post('/cadastrar_produto', async function(req, res){
