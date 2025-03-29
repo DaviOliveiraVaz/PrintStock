@@ -95,28 +95,6 @@ app.get("/sair", (req, res) => {
   });
 });
 
-app.get('/deletar-funcionario/:id', function(req, res){
-  try {
-    const id_usuario = req.session.id_usuario;
-
-    if (!id_usuario) {
-      return res.redirect("/");
-    }
-
-  Usuario.findByIdAndDelete(req.params.id, function(err, docs){
-      if(err){
-          res.send("Aconteceu o seguinte erro: " + err);
-      } else{
-          res.redirect("/");
-      };
-  });
-
-  }catch (error) {
-    console.error("Erro: ", error);
-    res.status(500).send("Ocorreu um erro ao carregar a página.");
-  }
-});
-
 app.get("/home", function (req, res) {
   try {
       const id_usuario = req.session.id_usuario;
@@ -129,7 +107,7 @@ app.get("/home", function (req, res) {
 
   }catch (error) {
     console.error("Erro: ", error);
-    res.status(500).send("Ocorreu um erro ao carregar os chamados.");
+    res.status(500).send("Ocorreu um erro ao carregar a página.");
 }
 });
 
@@ -145,7 +123,7 @@ app.get("/perfil", function (req, res) {
 
   }catch (error) {
     console.error("Erro: ", error);
-    res.status(500).send("Ocorreu um erro ao carregar os chamados.");
+    res.status(500).send("Ocorreu um erro ao carregar a página.");
 }
 });
 
@@ -161,7 +139,7 @@ app.get("/cadastrar_produto", function (req, res) {
 
 }catch (error) {
   console.error("Erro: ", error);
-  res.status(500).send("Ocorreu um erro ao carregar os chamados.");
+  res.status(500).send("Ocorreu um erro ao carregar a página.");
 }
 });
 
@@ -185,6 +163,23 @@ app.post('/cadastrar_produto', async function(req, res){
     res.redirect("/home");
   } catch (err) {
     res.send("<script>alert('Erro ao salvar o produto: " + err + "'); window.history.back();</script>");
+  }
+});
+
+app.get("/impressoras", async function (req, res) {
+  try {
+    const id_usuario = req.session.id_usuario;
+
+    if (!id_usuario) {
+      return res.redirect("/");
+    }
+
+    Produto.find({}).then(function (docs) {
+      res.render("impressoras.ejs", { Produtos: docs });
+    });
+  } catch (error) {
+    console.error("Erro: ", error);
+    res.status(500).send("Ocorreu um erro ao carregar os produtos.");
   }
 });
 

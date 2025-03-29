@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="geral.css">
+  <title>Impressoras</title>
+</head>
+<body>
+  <header>
+    <div class="top-header">
+        <div class="menu-icon" onclick="toggleMenu()">&#9776;</div>
+        <a href="/sair" class="logout"><img src="sair-icon.png" alt="" width="28px" onclick="return confirm('Tem certeza que deseja sair?')"></a>
+    </div>
+    <nav class="sidebar" id="sidebar">
+        <ul>
+            <li><img src="perfil-icon.png" alt="Ícone de perfil" width="30px"><a href="/perfil"><span class="menu-text">PERFIL</span></a></li>
+            <li><img src="home-icon.png" alt="Ícone de home" width="30px"><a href="/home"><span class="menu-text">HOME</span></a></li>
+            <li><img src="impressora-icon.png" alt="Ícone de impressoras" width="30px"><a href="/impressoras"><span class="menu-text">IMPRESSORAS</span></a></li>
+            <li><img src="suprimentos-icon.png" alt="Ícone de suprimentos" width="30px"><a href=""><span class="menu-text">SUPRIMENTOS</span></a></li>
+            <li><img src="pecas-icon.png" alt="Ícone de peças" width="30px"><a href=""><span class="menu-text">PEÇAS</span></a></li>
+            <li><img src="equipamentos-icon.png" alt="Ícone de equipamentos" width="30px"><a href=""><span class="menu-text">EQUIPAMENTOS</span></a></li>
+            <li><img src="cadastro-icon.png" alt="Ícone de cadastro" width="30px"><a href="/cadastrar_produto"><span class="menu-text">CADASTRAR PRODUTO</span></a></li>
+        </ul>
+    </nav>
+</header>
+<div class="content">
+  <main>
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <span class="close-button" onclick="closeModal()">&times;</span>
+            <h2>Dados do Produto</h2>
+            <p id="employee-data"></p>
+        </div>
+    </div>
+    <div class="content">
+        <h1>IMPRESSORAS</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>Código</th>
+                    <th>Nome</th>
+                    <th>Tipo</th>
+                    <th>Quantidade</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% Produtos.forEach(function(produto) { %>
+                <tr>
+                    <td><%= produto.codigo %></td>
+                    <td><%= produto.nome %></td>
+                    <td><%= produto.tipo %></td>
+                    <td><%= produto.quantidade %></td>
+                    <td>
+                        <a href="#" class="btn-edit">
+                            <img src="editar-icon.png" alt="Editar" width="30px">
+                        </a>
+                        <a href="#" onclick="openModal({
+                            nome: '<%= produto.nome %>',
+                            codigo: '<%= produto.codigo %>',
+                            tipo: '<%= produto.tipo %>',
+                            quantidade: '<%= produto.quantidade %>',
+                        }); return false;" class="btn-delete">
+                            <img src="view-icon.png" alt="Visualizar" width="30px">
+                        </a>
+                    </td>
+                </tr>
+                <% }) %>
+            </tbody>
+        </table>
+    </div>
+  </main>
+</div>
+  <script>
+    function toggleMenu() {
+            const sidebar = document.getElementById('sidebar');
+            const content = document.querySelector('.content');
+            sidebar.classList.toggle('active');
+            content.classList.toggle('active');
+        }
+
+    function openModal(employee) {
+            document.getElementById('employee-data').innerText = `
+            Código: ${employee.codigo}
+            Nome: ${employee.nome}
+            Tipo: ${employee.tipo}
+            Quantidade: ${employee.quantidade}
+            `;
+            document.getElementById('modal').style.display = 'block';
+    }
+
+    function closeModal() {
+            document.getElementById('modal').style.display = 'none';
+    }
+  </script>
+</body>
+</html>
