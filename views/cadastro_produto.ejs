@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="geral.css">
-  <title>HOME</title>
+  <title>CADASTRO DE PRODUTO</title>
 </head>
 <body>
   <header>
@@ -17,9 +17,9 @@
             <li><img src="perfil-icon.png" alt="Ícone de perfil" width="30px"><a href="/perfil"><span class="menu-text">PERFIL</span></a></li>
             <li><img src="home-icon.png" alt="Ícone de home" width="30px"><a href="/home"><span class="menu-text">HOME</span></a></li>
             <li><img src="impressora-icon.png" alt="Ícone de impressoras" width="30px"><a href="/impressoras"><span class="menu-text">IMPRESSORAS</span></a></li>
-            <li><img src="suprimentos-icon.png" alt="Ícone de suprimentos" width="30px"><a href=""><span class="menu-text">SUPRIMENTOS</span></a></li>
-            <li><img src="pecas-icon.png" alt="Ícone de peças" width="30px"><a href=""><span class="menu-text">PEÇAS</span></a></li>
-            <li><img src="equipamentos-icon.png" alt="Ícone de equipamentos" width="30px"><a href=""><span class="menu-text">EQUIPAMENTOS</span></a></li>
+            <li><img src="suprimentos-icon.png" alt="Ícone de suprimentos" width="30px"><a href="/suprimentos"><span class="menu-text">SUPRIMENTOS</span></a></li>
+            <li><img src="pecas-icon.png" alt="Ícone de peças" width="30px"><a href="/pecas"><span class="menu-text">PEÇAS</span></a></li>
+            <li><img src="equipamentos-icon.png" alt="Ícone de equipamentos" width="30px"><a href="/equipamentos"><span class="menu-text">EQUIPAMENTOS</span></a></li>
             <li><img src="cadastro-icon.png" alt="Ícone de cadastro" width="30px"><a href="/cadastrar_produto"><span class="menu-text">CADASTRAR PRODUTO</span></a></li>
         </ul>
     </nav>
@@ -42,27 +42,61 @@
                     </div>
 
                     <div class="input-group">
-                        <label for="prioridade">Tipo</label>
+                        <label for="tipo">Tipo</label>
                         <select name="tipo" id="tipo" required>
                           <option value="" disabled selected>Selecione o tipo do produto</option>
-                          <option value="TonerRecarga">Toner Recarga</option>
-                          <option value="TonerLocacao">Toner Locação</option>
-                          <option value="TonerNovo">Toner Novo</option>
-                          <option value="TintaCorante">Tinta Corante</option>
-                          <option value="TintaPigmentada">Tinta Pigmentada</option>
-                          <option value="TintaSublimatica">Tinta Sublimática</option>
-                          <option value="ImpressoraSeminova">Impressora Seminova</option>
-                          <option value="ImpressoraNova">Impressora Nova</option>
-                          <option value="ImpressoraSucata">Impressora Sucata</option>
-                          <option value="Pecas">Peças</option>
-                          <option value="Equipamentos">Equipamentos</option>
+                          <option value="Suprimento">Suprimento</option>
+                          <option value="Impressora">Impressora</option>
+                          <option value="Peça">Peça</option>
+                          <option value="Equipamento">Equipamento</option>
                         </select>
                     </div>
+
+                    <div class="input-group">
+                      <label for="tecnologia">Tecnologia</label>
+                      <select name="tecnologia" id="tecnologia" required>
+                        <option value="" disabled selected>Selecione a tecnologia do produto</option>
+                        <option value="Impressora Laser">Impressora Laser</option>
+                        <option value="Impressora Jato">Impressora Jato</option>
+                        <option value="Toner Pó">Toner</option>
+                        <option value="Toner Cilindro">Cilindro</option>
+                        <option value="Tinta Corante">Tinta Corante</option>
+                        <option value="Tinta Pigmentada">Tinta Pigmentada</option>
+                        <option value="Tinta Sublimática">Tinta Sublimática</option>
+                        <option value="Outro">Outro</option>
+                      </select>
+                  </div>
+
+                  <div class="input-group">
+                    <label for="categoria">Categoria</label>
+                    <select name="categoria" id="categoria" required>
+                      <option value="" disabled selected>Selecione a categoria do produto</option>
+                      <option value="Original">Original</option>
+                      <option value="Compatível">Compatível</option>
+                    </select>
+                </div>
+
+                <div class="input-group">
+                  <label for="estado">Estado</label>
+                  <select name="estado" id="estado" required>
+                    <option value="" disabled selected>Selecione o estado do produto</option>
+                    <option value="Novo">Novo</option>
+                    <option value="Seminovo">Seminovo</option>
+                    <option value="Recarga">Recarga</option>
+                    <option value="Locação">Locação</option>
+                    <option value="Sucata">Sucata</option>
+                  </select>
+              </div>
 
                     <div class="input-group">
                         <label for="quantidade">Quantidade</label>
                         <input type="number" name="quantidade" id="quantidade" placeholder="Informe a quantidade do produto" required>
                     </div>
+
+                    <div class="input-group">
+                      <label for="qtde_min">Estoque Mínimo</label>
+                      <input type="number" name="qtde_min" id="qtde_min" placeholder="Informe o estoque mínimo do produto" required>
+                  </div>
 
                     <div class="input-group button-group entrar">
                         <input type="submit" value="Cadastrar" id="env">

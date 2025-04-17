@@ -145,7 +145,17 @@ app.get("/cadastrar_produto", function (req, res) {
 
 app.post('/cadastrar_produto', async function(req, res){
   try {
-    const { codigo, nome, tipo, quantidade } = req.body;
+    const { 
+      codigo, 
+      nome, 
+      tipo, 
+      tecnologia, 
+      categoria,
+      estado, 
+      quantidade, 
+      qtde_min
+    } = req.body;
+
     const produtoExistente = await Produto.findOne({ codigo });
 
     if (produtoExistente) {
@@ -156,13 +166,38 @@ app.post('/cadastrar_produto', async function(req, res){
       codigo,
       nome,
       tipo,
-      quantidade
+      tecnologia,
+      categoria,
+      estado,
+      quantidade,
+      qtde_min,
     });
 
     await produto.save();
     res.redirect("/home");
   } catch (err) {
     res.send("<script>alert('Erro ao salvar o produto: " + err + "'); window.history.back();</script>");
+  }
+});
+
+app.post("/atualizar_quantidade/:id", async function (req, res) {
+  try {
+    const { id } = req.params;
+    const { quantidade } = req.body;
+
+    const produto = await Produto.findById(id);
+
+    if (!produto) {
+      return res.status(404).send('Produto não encontrado');
+    }
+
+    produto.quantidade = quantidade;
+    await produto.save();
+
+    res.json({ success: true, quantidade: produto.quantidade });
+  } catch (error) {
+    console.error("Erro ao atualizar a quantidade: ", error);
+    res.status(500).json({ success: false, message: 'Erro ao atualizar a quantidade' });
   }
 });
 
@@ -176,6 +211,57 @@ app.get("/impressoras", async function (req, res) {
 
     Produto.find({}).then(function (docs) {
       res.render("impressoras.ejs", { Produtos: docs });
+    });
+  } catch (error) {
+    console.error("Erro: ", error);
+    res.status(500).send("Ocorreu um erro ao carregar os produtos.");
+  }
+});
+
+app.get("/suprimentos", async function (req, res) {
+  try {
+    const id_usuario = req.session.id_usuario;
+
+    if (!id_usuario) {
+      return res.redirect("/");
+    }
+
+    Produto.find({}).then(function (docs) {
+      res.render("suprimentos.ejs", { Produtos: docs });
+    });
+  } catch (error) {
+    console.error("Erro: ", error);
+    res.status(500).send("Ocorreu um erro ao carregar os produtos.");
+  }
+});
+
+app.get("/pecas", async function (req, res) {
+  try {
+    const id_usuario = req.session.id_usuario;
+
+    if (!id_usuario) {
+      return res.redirect("/");
+    }
+
+    Produto.find({}).then(function (docs) {
+      res.render("pecas.ejs", { Produtos: docs });
+    });
+  } catch (error) {
+    console.error("Erro: ", error);
+    res.status(500).send("Ocorreu um erro ao carregar os produtos.");
+  }
+});
+
+app.get("/equipamentos", async function (req, res) {
+  try {
+    const id_usuario = req.session.id_usuario;
+
+    if (!id_usuario) {
+      return res.redirect("/");
+    }
+
+    Produto.find({}).then(function (docs) {
+      res.render("equipamentos.ejs", { Produtos: docs });
     });
   } catch (error) {
     console.error("Erro: ", error);
