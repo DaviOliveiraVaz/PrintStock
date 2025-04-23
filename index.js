@@ -269,6 +269,66 @@ app.get("/equipamentos", async function (req, res) {
   }
 });
 
+app.get("/editar-produto/:id", function(req, res){
+  try {
+    const id_usuario = req.session.id_usuario;
+
+    if (!id_usuario) {
+      return res.redirect("/");
+    }
+
+  Produto.findById(req.params.id).then(function(docs){
+      res.render("editar_produto.ejs", { Produto : docs});
+  });
+
+  }catch (error) {
+    console.error("Erro: ", error);
+    res.status(500).send("Ocorreu um erro.");
+  }
+});
+
+app.post('/editar-produto/:id', function(req, res){
+  Produto.findByIdAndUpdate(req.params.id,
+       {
+          codigo: req.body.codigo,
+          nome: req.body.nome,
+          tipo: req.body.tipo,
+          tecnologia: req.body.tecnologia,
+          categoria: req.body.categoria,
+          estado: req.body.estado,
+          quantidade: req.body.quantidade,
+          qtde_min: req.body.qtde_min
+       },
+      function(err, docs){
+          if(err){
+              res.send("Aconteceu o seguinte erro: " + err);
+          } else{
+              res.redirect("/home");
+          }});
+});
+
+app.get('/deletar-produto/:id', function(req, res){
+  try {
+    const id_usuario = req.session.id_usuario;
+
+    if (!id_usuario) {
+      return res.redirect("/");
+    }
+
+  Produto.findByIdAndDelete(req.params.id, function(err, docs){
+      if(err){
+          res.send("Aconteceu o seguinte erro: " + err);
+      } else{
+          res.redirect("/home");
+      };
+  });
+
+}catch (error) {
+  console.error("Erro: ", error);
+  res.status(500).send("Ocorreu um erro.");
+}
+});
+
 app.listen("3000", function () {
   console.log("🚀 Servidor rodando na porta 3000!");
 });

@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href='geral.css'>
+  <title>EDITAR PRODUTO</title>
+</head>
+<body>
+  <header>
+    <div class="top-header">
+        <div class="menu-icon" onclick="toggleMenu()">&#9776;</div>
+        <a href="/sair" class="logout"><img src="sair-icon.png" alt="" width="28px" onclick="return confirm('Tem certeza que deseja sair?')"></a>
+    </div>
+    <nav class="sidebar" id="sidebar">
+        <ul>
+            <li><img src="perfil-icon.png" alt="Ícone de perfil" width="30px"><a href="/perfil"><span class="menu-text">PERFIL</span></a></li>
+            <li><img src="home-icon.png" alt="Ícone de home" width="30px"><a href="/home"><span class="menu-text">HOME</span></a></li>
+            <li><img src="impressora-icon.png" alt="Ícone de impressoras" width="30px"><a href="/impressoras"><span class="menu-text">IMPRESSORAS</span></a></li>
+            <li><img src="suprimentos-icon.png" alt="Ícone de suprimentos" width="30px"><a href="/suprimentos"><span class="menu-text">SUPRIMENTOS</span></a></li>
+            <li><img src="pecas-icon.png" alt="Ícone de peças" width="30px"><a href="/pecas"><span class="menu-text">PEÇAS</span></a></li>
+            <li><img src="equipamentos-icon.png" alt="Ícone de equipamentos" width="30px"><a href="/equipamentos"><span class="menu-text">EQUIPAMENTOS</span></a></li>
+            <li><img src="cadastro-icon.png" alt="Ícone de cadastro" width="30px"><a href="/cadastrar_produto"><span class="menu-text">CADASTRAR PRODUTO</span></a></li>
+        </ul>
+    </nav>
+</header>
+<div class="content">
+  <main>
+    <section class="formulario">
+        <div class="box">
+            <div class="form-box">
+                <h2>EDITE SEU PRODUTO</h2>
+                <form method="post" id="form">
+                    <div class="input-group">
+                        <label for="codigo">Código</label>
+                        <input type="text" name="codigo" id="codigo" value="<%= Produto.codigo %>" required>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="nome">Nome</label>
+                        <input type="text" name="nome" id=  "nome" value="<%= Produto.nome %>" required>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="tipo">Tipo</label>
+                        <select name="tipo" id="tipo" required>
+                          <option value="<%= Produto.tipo %>" disabled selected></option>
+                          <option value="Suprimento">Suprimento</option>
+                          <option value="Impressora">Impressora</option>
+                          <option value="Peça">Peça</option>
+                          <option value="Equipamento">Equipamento</option>
+                        </select>
+                    </div>
+
+                    <div class="input-group">
+                      <label for="tecnologia">Tecnologia</label>
+                      <select name="tecnologia" id="tecnologia" required>
+                        <option value="<%= Produto.tecnologia %>" disabled selected></option>
+                        <option value="Impressora Laser">Impressora Laser</option>
+                        <option value="Impressora Jato">Impressora Jato</option>
+                        <option value="Toner Pó">Toner</option>
+                        <option value="Toner Cilindro">Cilindro</option>
+                        <option value="Tinta Corante">Tinta Corante</option>
+                        <option value="Tinta Pigmentada">Tinta Pigmentada</option>
+                        <option value="Tinta Sublimática">Tinta Sublimática</option>
+                        <option value="Outro">Outro</option>
+                      </select>
+                  </div>
+
+                  <div class="input-group">
+                    <label for="categoria">Categoria</label>
+                    <select name="categoria" id="categoria" required>
+                      <option value="<%= Produto.categoria %>" disabled selected></option>
+                      <option value="Original">Original</option>
+                      <option value="Compatível">Compatível</option>
+                    </select>
+                </div>
+
+                <div class="input-group">
+                  <label for="estado">Estado</label>
+                  <select name="estado" id="estado" required>
+                    <option value="<%= Produto.estado %>" disabled selected></option>
+                    <option value="Novo">Novo</option>
+                    <option value="Seminovo">Seminovo</option>
+                    <option value="Recarga">Recarga</option>
+                    <option value="Locação">Locação</option>
+                    <option value="Sucata">Sucata</option>
+                  </select>
+              </div>
+
+                    <div class="input-group">
+                        <label for="quantidade">Quantidade</label>
+                        <input type="number" name="quantidade" id="quantidade" value="<%= Produto.quantidade %>" required>
+                    </div>
+
+                    <div class="input-group">
+                      <label for="qtde_min">Estoque Mínimo</label>
+                      <input type="number" name="qtde_min" id="qtde_min"value="<%= Produto.qtde_min %>" required>
+                  </div>
+
+                    <div class="input-group button-group entrar">
+                        <input type="submit" value="Editar" id="env">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+  </main>
+</div>
+  <script>
+    function toggleMenu() {
+            const sidebar = document.getElementById('sidebar');
+            const content = document.querySelector('.content');
+            sidebar.classList.toggle('active');
+            content.classList.toggle('active');
+        }
+  </script>
+</body>
+</html>
