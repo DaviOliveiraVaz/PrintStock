@@ -4,38 +4,64 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="geral.css">
-  <title>PERFIL</title>
+  <script src="https://unpkg.com/feather-icons"></script>
+  <title>Perfil</title>
 </head>
 <body>
   <header>
     <div class="top-header">
-        <div class="menu-icon" onclick="toggleMenu()">&#9776;</div>
-        <a href="/sair" class="logout"><img src="sair-icon.png" alt="" width="28px" onclick="return confirm('Tem certeza que deseja sair?')"></a>
-    </div>
-    <nav class="sidebar" id="sidebar">
-        <ul>
-            <li><img src="perfil-icon.png" alt="Ícone de perfil" width="30px"><a href="/perfil"><span class="menu-text">PERFIL</span></a></li>
-            <li><img src="home-icon.png" alt="Ícone de home" width="30px"><a href="/home"><span class="menu-text">HOME</span></a></li>
-            <li><img src="impressora-icon.png" alt="Ícone de impressoras" width="30px"><a href="/impressoras"><span class="menu-text">IMPRESSORAS</span></a></li>
-            <li><img src="suprimentos-icon.png" alt="Ícone de suprimentos" width="30px"><a href="/suprimentos"><span class="menu-text">SUPRIMENTOS</span></a></li>
-            <li><img src="pecas-icon.png" alt="Ícone de peças" width="30px"><a href="/pecas"><span class="menu-text">PEÇAS</span></a></li>
-            <li><img src="equipamentos-icon.png" alt="Ícone de equipamentos" width="30px"><a href="/equipamentos"><span class="menu-text">EQUIPAMENTOS</span></a></li>
-            <li><img src="cadastro-icon.png" alt="Ícone de cadastro" width="30px"><a href="/cadastrar_produto"><span class="menu-text">CADASTRAR PRODUTO</span></a></li>
+        <div class="topbar-fixed" role="navigation">
+          <div class="topbar-container">
+            <div class="topbar-header">
+              <button type="button" class="topbar-toggle" data-toggle="collapse" data-target=".topbar-collapse">
+                <span class="topbar-bar"></span>
+              </button>
+              <div class="small-logo-container">
+                <a class="small-logo" href="/home">PrintStock</a>
+              </div>
+            </div>
+            <div class="topbar-collapse collapse">
+              <ul class="topbar-nav">
+                <li><a href="/sair" onclick="return confirm('Tem certeza que deseja sair do sistema?')">Sair</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+    <div class="sidebar" id="sidebar">
+      <nav class="navbar">
+        <ul class="navbar__menu">
+          <li class="navbar__item">
+            <a href="/perfil" class="navbar__link"><i data-feather="user"></i><span>Perfil</span></a>        
+          </li>     
+          <li class="navbar__item">
+            <a href="/home" class="navbar__link"><i data-feather="home"></i><span>Home</span></a>
+          </li>
+          <li class="navbar__item">
+            <a href="/impressoras" class="navbar__link"><i data-feather="printer"></i><span>Impressoras</span></a>        
+          </li>
+          <li class="navbar__item">
+            <a href="/suprimentos" class="navbar__link"><i data-feather="droplet"></i><span>Suprimentos</span></a>        
+          </li>
+          <li class="navbar__item">
+            <a href="/pecas" class="navbar__link"><i data-feather="cpu"></i><span>Peças</span></a>        
+          </li>
+          <li class="navbar__item">
+            <a href="/equipamentos" class="navbar__link"><i data-feather="package"></i><span>Equipamentos</span></a>        
+          </li>
+          <li class="navbar__item">
+            <a href="/cadastrar_produto" class="navbar__link"><i data-feather="file-plus"></i><span>Cadastrar Produto</span></a>        
+          </li>
         </ul>
-    </nav>
+      </nav>
+    </div>
 </header>
 <div class="content">
   <main>
-    <h2>TESTE TESTE</h2>
+    <h2>PERFIL EM CONSTRUÇÃO!</h2>
   </main>
 </div>
   <script>
-    function toggleMenu() {
-            const sidebar = document.getElementById('sidebar');
-            const content = document.querySelector('.content');
-            sidebar.classList.toggle('active');
-            content.classList.toggle('active');
-        }
+    feather.replace();
   </script>
 </body>
 </html>

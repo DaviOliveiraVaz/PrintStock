@@ -329,6 +329,10 @@ app.get('/deletar-produto/:id', function(req, res){
 }
 });
 
+app.get("/teste", function (req, res) {
+  res.render("TESTE.ejs", {});
+});
+
 app.listen("3000", function () {
   console.log("🚀 Servidor rodando na porta 3000!");
 });
