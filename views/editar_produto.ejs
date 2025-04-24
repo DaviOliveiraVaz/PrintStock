@@ -3,24 +3,24 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href='geral.css'>
+  <link rel="stylesheet" href="/geral.css">
   <title>EDITAR PRODUTO</title>
 </head>
 <body>
   <header>
     <div class="top-header">
         <div class="menu-icon" onclick="toggleMenu()">&#9776;</div>
-        <a href="/sair" class="logout"><img src="sair-icon.png" alt="" width="28px" onclick="return confirm('Tem certeza que deseja sair?')"></a>
+        <a href="/sair" class="logout"><img src="/sair-icon.png" alt="" width="28px" onclick="return confirm('Tem certeza que deseja sair?')"></a>
     </div>
     <nav class="sidebar" id="sidebar">
         <ul>
-            <li><img src="perfil-icon.png" alt="Ícone de perfil" width="30px"><a href="/perfil"><span class="menu-text">PERFIL</span></a></li>
-            <li><img src="home-icon.png" alt="Ícone de home" width="30px"><a href="/home"><span class="menu-text">HOME</span></a></li>
-            <li><img src="impressora-icon.png" alt="Ícone de impressoras" width="30px"><a href="/impressoras"><span class="menu-text">IMPRESSORAS</span></a></li>
-            <li><img src="suprimentos-icon.png" alt="Ícone de suprimentos" width="30px"><a href="/suprimentos"><span class="menu-text">SUPRIMENTOS</span></a></li>
-            <li><img src="pecas-icon.png" alt="Ícone de peças" width="30px"><a href="/pecas"><span class="menu-text">PEÇAS</span></a></li>
-            <li><img src="equipamentos-icon.png" alt="Ícone de equipamentos" width="30px"><a href="/equipamentos"><span class="menu-text">EQUIPAMENTOS</span></a></li>
-            <li><img src="cadastro-icon.png" alt="Ícone de cadastro" width="30px"><a href="/cadastrar_produto"><span class="menu-text">CADASTRAR PRODUTO</span></a></li>
+            <li><img src="/perfil-icon.png" alt="Ícone de perfil" width="30px"><a href="/perfil"><span class="menu-text">PERFIL</span></a></li>
+            <li><img src="/home-icon.png" alt="Ícone de home" width="30px"><a href="/home"><span class="menu-text">HOME</span></a></li>
+            <li><img src="/impressora-icon.png" alt="Ícone de impressoras" width="30px"><a href="/impressoras"><span class="menu-text">IMPRESSORAS</span></a></li>
+            <li><img src="/suprimentos-icon.png" alt="Ícone de suprimentos" width="30px"><a href="/suprimentos"><span class="menu-text">SUPRIMENTOS</span></a></li>
+            <li><img src="/pecas-icon.png" alt="Ícone de peças" width="30px"><a href="/pecas"><span class="menu-text">PEÇAS</span></a></li>
+            <li><img src="/equipamentos-icon.png" alt="Ícone de equipamentos" width="30px"><a href="/equipamentos"><span class="menu-text">EQUIPAMENTOS</span></a></li>
+            <li><img src="/cadastro-icon.png" alt="Ícone de cadastro" width="30px"><a href="/cadastrar_produto"><span class="menu-text">CADASTRAR PRODUTO</span></a></li>
         </ul>
     </nav>
 </header>
@@ -99,8 +99,10 @@
                   </div>
 
                     <div class="input-group button-group entrar">
-                        <input type="submit" value="Editar" id="env">
+                        <input type="submit" value="Salvar" id="env" onclick="return confirm('Tem certeza que deseja editar o produto?')">
+                        <a href="/deletar/<%=Produto._id%>" onclick="return confirm('Tem certeza que deseja excluir o produto?')"><button>Excluir</button></a>
                     </div>
+                  </div>
                 </form>
             </div>
         </div>
