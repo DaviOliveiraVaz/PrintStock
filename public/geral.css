@@ -1201,9 +1201,9 @@ body {
 /* |||||| MAIN - CONTENT ||||| */
 
   .content {
-    margin-left: 150px;
+    margin-left: 60px;
     padding: 20px;
-    margin-top: 80px;
+    margin-top: 30px;
     transition: margin-left 0.3s ease;
   }
 
@@ -1214,6 +1214,7 @@ body {
   h1 {
     color: #000000;
     text-align: center;
+    margin-top: 30px;
   }
 
   table {
@@ -1299,4 +1300,9 @@ body {
   @keyframes fadeIn {
     from { opacity: 0; }
     to { opacity: 1; }
+  }
+
+  .formulario {
+    margin-left: 60px;
+    margin-top: 30px;
   }
