@@ -1225,7 +1225,7 @@ body {
   }
 
   table thead {
-    background-color: #003cff;
+    background-color: #455EB5;
     color: white;
   }
 
@@ -1244,8 +1244,13 @@ body {
     text-decoration: none;
     color: white;
     font-weight: bold;
-    background-color: #003cff;
-    padding-top: 20px;
+    background-color: #455EB5;
+    padding-top: 13px;
+    display: inline-block;
+  }
+
+  .btn-edit {
+    margin-right: 2px;
   }
 
   .btn-edit:hover, .btn-delete:hover {

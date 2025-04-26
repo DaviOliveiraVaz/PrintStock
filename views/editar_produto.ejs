@@ -63,7 +63,7 @@
                 <form method="post" id="form">
                     <div class="input-group">
                         <label for="codigo">Código</label>
-                        <input type="text" name="codigo" id="codigo" value="<%= Produto.codigo %>" required>
+                        <input type="text" name="codigo" id="codigo" value="<%= Produto.codigo %>" disabled required>
                     </div>
 
                     <div class="input-group">
@@ -103,6 +103,7 @@
                         <option disabled selected>Selecione uma categoria</option>
                         <option value="Original" <%= Produto.categoria === 'Original' ? 'selected' : '' %>>Original</option>
                         <option value="Compatível" <%= Produto.categoria === 'Compatível' ? 'selected' : '' %>>Compatível</option>
+                        <option value="Outro" <%= Produto.categoria === 'Outro' ? 'selected' : '' %>>Outro</option>
                       </select>
                     </div>
 

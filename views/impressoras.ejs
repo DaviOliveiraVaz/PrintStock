@@ -95,7 +95,7 @@
                           <td><%= produto.quantidade %></td>
                           <td>
                               <a href="/editar-produto/<%= produto._id %>" class="btn-edit">
-                                  <img src="editar-icon.png" alt="Editar" width="30px">
+                                <i data-feather="edit"></i>
                               </a>
                               <a href="#" onclick="openModal({
                                   _id: '<%= produto._id %>',
@@ -107,7 +107,7 @@
                                   categoria: '<%= produto.categoria %>',
                                   quantidade: Number('<%= produto.quantidade %>'),
                               }); return false;" class="btn-delete">
-                                  <img src="view-icon.png" alt="Visualizar" width="30px">
+                                  <i data-feather="eye"></i>
                               </a>
                           </td>
                       </tr>
