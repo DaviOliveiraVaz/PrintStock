@@ -174,7 +174,8 @@ app.post('/cadastrar_produto', async function(req, res){
     });
 
     await produto.save();
-    res.redirect("/home");
+
+    res.send("<script>alert('Produto cadastrado com sucesso!'); window.history.back();</script>");
   } catch (err) {
     res.send("<script>alert('Erro ao salvar o produto: " + err + "'); window.history.back();</script>");
   }
@@ -278,7 +279,7 @@ app.get("/editar-produto/:id", function(req, res){
     }
 
   Produto.findById(req.params.id).then(function(docs){
-      res.render("editar_produto.ejs", { Produto : docs});
+      res.render("editar_produto.ejs", { Produto: docs});
   });
 
   }catch (error) {
@@ -287,27 +288,30 @@ app.get("/editar-produto/:id", function(req, res){
   }
 });
 
-app.post('/editar-produto/:id', function(req, res){
-  Produto.findByIdAndUpdate(req.params.id,
-       {
-          codigo: req.body.codigo,
-          nome: req.body.nome,
-          tipo: req.body.tipo,
-          tecnologia: req.body.tecnologia,
-          categoria: req.body.categoria,
-          estado: req.body.estado,
-          quantidade: req.body.quantidade,
-          qtde_min: req.body.qtde_min
-       },
-      function(err, docs){
-          if(err){
-              res.send("Aconteceu o seguinte erro: " + err);
-          } else{
-              res.redirect("/home");
-          }});
+app.post('/editar-produto/:id', async function(req, res) {
+  try {
+    await Produto.findByIdAndUpdate(req.params.id, {
+      codigo: req.body.codigo,
+      nome: req.body.nome,
+      tipo: req.body.tipo,
+      tecnologia: req.body.tecnologia,
+      categoria: req.body.categoria,
+      estado: req.body.estado,
+      quantidade: req.body.quantidade,
+      qtde_min: req.body.qtde_min
+    });
+    res.send(`
+      <script>
+        alert('Produto editado com sucesso!');
+        window.location.href = "/home";
+      </script>
+    `);
+  } catch (err) {
+    res.send("<script>alert('Erro ao editar o produto: " + err + "'); window.history.back();</script>");
+  }
 });
 
-app.get('/deletar-produto/:id', function(req, res){
+app.get('/deletar-produto/:id', async function(req, res) {
   try {
     const id_usuario = req.session.id_usuario;
 
@@ -315,18 +319,19 @@ app.get('/deletar-produto/:id', function(req, res){
       return res.redirect("/");
     }
 
-  Produto.findByIdAndDelete(req.params.id, function(err, docs){
-      if(err){
-          res.send("Aconteceu o seguinte erro: " + err);
-      } else{
-          res.redirect("/home");
-      };
-  });
+    await Produto.findByIdAndDelete(req.params.id);
 
-}catch (error) {
-  console.error("Erro: ", error);
-  res.status(500).send("Ocorreu um erro.");
-}
+    res.send(`
+      <script>
+        alert('Produto deletado com sucesso!');
+        window.location.href = "/home";
+      </script>
+    `);
+
+  } catch (error) {
+    console.error("Erro ao deletar produto:", error);
+    res.send("<script>alert('Erro ao deletar o produto: " + error + "'); window.history.back();</script>");
+  }
 });
 
 app.get("/teste", function (req, res) {

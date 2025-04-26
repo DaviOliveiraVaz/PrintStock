@@ -72,51 +72,51 @@
                     </div>
 
                     <div class="input-group">
-                        <label for="tipo">Tipo</label>
-                        <select name="tipo" id="tipo" required>
-                          <option value="<%= Produto.tipo %>" disabled selected></option>
-                          <option value="Suprimento">Suprimento</option>
-                          <option value="Impressora">Impressora</option>
-                          <option value="Peça">Peça</option>
-                          <option value="Equipamento">Equipamento</option>
-                        </select>
+                      <label for="tipo">Tipo</label>
+                      <select name="tipo" id="tipo" required>
+                        <option disabled value="">Selecione um tipo</option>
+                        <option value="Suprimento" <%= Produto.tipo === 'Suprimento' ? 'selected' : '' %>>Suprimento</option>
+                        <option value="Impressora" <%= Produto.tipo === 'Impressora' ? 'selected' : '' %>>Impressora</option>
+                        <option value="Peça" <%= Produto.tipo === 'Peça' ? 'selected' : '' %>>Peça</option>
+                        <option value="Equipamento" <%= Produto.tipo === 'Equipamento' ? 'selected' : '' %>>Equipamento</option>
+                      </select>
                     </div>
-
+                    
                     <div class="input-group">
                       <label for="tecnologia">Tecnologia</label>
                       <select name="tecnologia" id="tecnologia" required>
-                        <option value="<%= Produto.tecnologia %>" disabled selected></option>
-                        <option value="Impressora Laser">Impressora Laser</option>
-                        <option value="Impressora Jato">Impressora Jato</option>
-                        <option value="Toner Pó">Toner</option>
-                        <option value="Toner Cilindro">Cilindro</option>
-                        <option value="Tinta Corante">Tinta Corante</option>
-                        <option value="Tinta Pigmentada">Tinta Pigmentada</option>
-                        <option value="Tinta Sublimática">Tinta Sublimática</option>
-                        <option value="Outro">Outro</option>
+                        <option disabled selected>Selecione uma tecnologia</option>
+                        <option value="Impressora Laser" <%= Produto.tecnologia === 'Impressora Laser' ? 'selected' : '' %>>Impressora Laser</option>
+                        <option value="Impressora Jato" <%= Produto.tecnologia === 'Impressora Jato' ? 'selected' : '' %>>Impressora Jato</option>
+                        <option value="Toner Pó" <%= Produto.tecnologia === 'Toner Pó' ? 'selected' : '' %>>Toner</option>
+                        <option value="Toner Cilindro" <%= Produto.tecnologia === 'Toner Cilindro' ? 'selected' : '' %>>Cilindro</option>
+                        <option value="Tinta Corante" <%= Produto.tecnologia === 'Tinta Corante' ? 'selected' : '' %>>Tinta Corante</option>
+                        <option value="Tinta Pigmentada" <%= Produto.tecnologia === 'Tinta Pigmentada' ? 'selected' : '' %>>Tinta Pigmentada</option>
+                        <option value="Tinta Sublimática" <%= Produto.tecnologia === 'Tinta Sublimática' ? 'selected' : '' %>>Tinta Sublimática</option>
+                        <option value="Outro" <%= Produto.tecnologia === 'Outro' ? 'selected' : '' %>>Outro</option>
                       </select>
-                  </div>
+                    </div>
 
-                  <div class="input-group">
-                    <label for="categoria">Categoria</label>
-                    <select name="categoria" id="categoria" required>
-                      <option value="<%= Produto.categoria %>" disabled selected></option>
-                      <option value="Original">Original</option>
-                      <option value="Compatível">Compatível</option>
-                    </select>
-                </div>
+                    <div class="input-group">
+                      <label for="categoria">Categoria</label>
+                      <select name="categoria" id="categoria" required>
+                        <option disabled selected>Selecione uma categoria</option>
+                        <option value="Original" <%= Produto.categoria === 'Original' ? 'selected' : '' %>>Original</option>
+                        <option value="Compatível" <%= Produto.categoria === 'Compatível' ? 'selected' : '' %>>Compatível</option>
+                      </select>
+                    </div>
 
-                <div class="input-group">
-                  <label for="estado">Estado</label>
-                  <select name="estado" id="estado" required>
-                    <option value="<%= Produto.estado %>" disabled selected></option>
-                    <option value="Novo">Novo</option>
-                    <option value="Seminovo">Seminovo</option>
-                    <option value="Recarga">Recarga</option>
-                    <option value="Locação">Locação</option>
-                    <option value="Sucata">Sucata</option>
-                  </select>
-              </div>
+                    <div class="input-group">
+                      <label for="estado">Estado</label>
+                      <select name="estado" id="estado" required>
+                        <option disabled selected>Selecione um estado</option>
+                        <option value="Novo" <%= Produto.estado === 'Novo' ? 'selected' : '' %>>Novo</option>
+                        <option value="Seminovo" <%= Produto.estado === 'Seminovo' ? 'selected' : '' %>>Seminovo</option>
+                        <option value="Recarga" <%= Produto.estado === 'Recarga' ? 'selected' : '' %>>Recarga</option>
+                        <option value="Locação" <%= Produto.estado === 'Locação' ? 'selected' : '' %>>Locação</option>
+                        <option value="Sucata" <%= Produto.estado === 'Sucata' ? 'selected' : '' %>>Sucata</option>
+                      </select>
+                    </div>
 
                     <div class="input-group">
                         <label for="quantidade">Quantidade</label>
@@ -130,7 +130,7 @@
 
                     <div class="input-group button-group entrar">
                         <input type="submit" value="Salvar" id="env" onclick="return confirm('Tem certeza que deseja editar o produto?')">
-                        <a href="/deletar/<%=Produto._id%>" onclick="return confirm('Tem certeza que deseja excluir o produto?')"><button>Excluir</button></a>
+                        <a href="/deletar-produto/<%= Produto._id %>" class="botao-excluir" onclick="return confirm('Tem certeza que deseja excluir o produto?')">Excluir</a>
                     </div>
                   </div>
                 </form>
