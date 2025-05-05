@@ -61,27 +61,25 @@
             <div class="form-box">
                 <h2>CADASTRE SEU PRODUTO</h2>
                 <form method="post" id="form">
+                  <div class="input-grid">
                     <div class="input-group">
-                        <label for="codigo">Código</label>
-                        <input type="text" name="codigo" id="codigo" placeholder="Informe o código do produto" required>
+                      <label for="codigo">Código</label>
+                      <input type="text" name="codigo" id="codigo" placeholder="Informe o código do produto" required>
                     </div>
-
                     <div class="input-group">
-                        <label for="nome">Nome</label>
-                        <input type="text" name="nome" id=  "nome" placeholder="Informe o nome do produto" required>
+                      <label for="nome">Nome</label>
+                      <input type="text" name="nome" id="nome" placeholder="Informe o nome do produto" required>
                     </div>
-
                     <div class="input-group">
-                        <label for="tipo">Tipo</label>
-                        <select name="tipo" id="tipo" required>
-                          <option value="" disabled selected>Selecione o tipo do produto</option>
-                          <option value="Suprimento">Suprimento</option>
-                          <option value="Impressora">Impressora</option>
-                          <option value="Peça">Peça</option>
-                          <option value="Equipamento">Equipamento</option>
-                        </select>
+                      <label for="tipo">Tipo</label>
+                      <select name="tipo" id="tipo" required>
+                        <option value="" disabled selected>Selecione o tipo do produto</option>
+                        <option value="Suprimento">Suprimento</option>
+                        <option value="Impressora">Impressora</option>
+                        <option value="Peça">Peça</option>
+                        <option value="Equipamento">Equipamento</option>
+                      </select>
                     </div>
-
                     <div class="input-group">
                       <label for="tecnologia">Tecnologia</label>
                       <select name="tecnologia" id="tecnologia" required>
@@ -95,44 +93,44 @@
                         <option value="Tinta Sublimática">Tinta Sublimática</option>
                         <option value="Outro">Outro</option>
                       </select>
-                  </div>
-
-                  <div class="input-group">
-                    <label for="categoria">Categoria</label>
-                    <select name="categoria" id="categoria" required>
-                      <option value="" disabled selected>Selecione a categoria do produto</option>
-                      <option value="Original">Original</option>
-                      <option value="Compatível">Compatível</option>
-                      <option value="Outro">Outro</option>
-                    </select>
-                </div>
-
-                <div class="input-group">
-                  <label for="estado">Estado</label>
-                  <select name="estado" id="estado" required>
-                    <option value="" disabled selected>Selecione o estado do produto</option>
-                    <option value="Novo">Novo</option>
-                    <option value="Seminovo">Seminovo</option>
-                    <option value="Recarga">Recarga</option>
-                    <option value="Locação">Locação</option>
-                    <option value="Sucata">Sucata</option>
-                  </select>
-              </div>
-
-                    <div class="input-group">
-                        <label for="quantidade">Quantidade</label>
-                        <input type="number" name="quantidade" id="quantidade" placeholder="Informe a quantidade do produto" required>
                     </div>
-
+                    <div class="input-group">
+                      <label for="categoria">Categoria</label>
+                      <select name="categoria" id="categoria" required>
+                        <option value="" disabled selected>Selecione a categoria do produto</option>
+                        <option value="Original">Original</option>
+                        <option value="Compatível">Compatível</option>
+                        <option value="Monocromática">Monocromática</option>
+                        <option value="Color">Color</option>
+                        <option value="Outro">Outro</option>
+                      </select>
+                    </div>
+                    <div class="input-group">
+                      <label for="estado">Estado</label>
+                      <select name="estado" id="estado" required>
+                        <option value="" disabled selected>Selecione o estado do produto</option>
+                        <option value="Novo">Novo</option>
+                        <option value="Seminovo">Seminovo</option>
+                        <option value="Recarga">Recarga</option>
+                        <option value="Locação">Locação</option>
+                        <option value="Sucata">Sucata</option>
+                      </select>
+                    </div>
+                    <div class="input-group">
+                      <label for="quantidade">Quantidade</label>
+                      <input type="number" name="quantidade" id="quantidade" placeholder="Informe a quantidade do produto" required>
+                    </div>
                     <div class="input-group">
                       <label for="qtde_min">Estoque Mínimo</label>
                       <input type="number" name="qtde_min" id="qtde_min" placeholder="Informe o estoque mínimo do produto" required>
-                  </div>
-
-                    <div class="input-group button-group entrar">
-                        <input type="submit" value="Cadastrar" id="env">
                     </div>
+                  </div>
+                
+                  <div class="button-group">
+                    <button type="submit" class="btn-cadastrar">Cadastrar</button>
+                  </div>
                 </form>
+                
             </div>
         </div>
     </section>

@@ -61,6 +61,7 @@
             <div class="form-box">
                 <h2>EDITE SEU PRODUTO</h2>
                 <form method="post" id="form">
+                  <div class="input-grid">
                     <div class="input-group">
                         <label for="codigo">Código</label>
                         <input type="text" name="codigo" id="codigo" value="<%= Produto.codigo %>" disabled required>
@@ -103,6 +104,8 @@
                         <option disabled selected>Selecione uma categoria</option>
                         <option value="Original" <%= Produto.categoria === 'Original' ? 'selected' : '' %>>Original</option>
                         <option value="Compatível" <%= Produto.categoria === 'Compatível' ? 'selected' : '' %>>Compatível</option>
+                        <option value="Monocromática" <%= Produto.categoria === 'Monocromática' ? 'selected' : '' %>>Monocromática</option>
+                        <option value="Color" <%= Produto.categoria === 'Color' ? 'selected' : '' %>>Color</option>
                         <option value="Outro" <%= Produto.categoria === 'Outro' ? 'selected' : '' %>>Outro</option>
                       </select>
                     </div>
@@ -128,11 +131,12 @@
                       <label for="qtde_min">Estoque Mínimo</label>
                       <input type="number" name="qtde_min" id="qtde_min"value="<%= Produto.qtde_min %>" required>
                   </div>
+                 </div>
 
-                    <div class="input-group button-group entrar">
-                        <input type="submit" value="Salvar" id="env" onclick="return confirm('Tem certeza que deseja editar o produto?')">
-                        <a href="/deletar-produto/<%= Produto._id %>" class="botao-excluir" onclick="return confirm('Tem certeza que deseja excluir o produto?')">Excluir</a>
-                    </div>
+                 <div class="button-group">
+                  <button type="submit" class="btn-editar">Salvar</button>
+                  <a href="/deletar-produto/<%= Produto._id %>" class="btn-excluir" onclick="return confirm('Tem certeza que deseja excluir o produto?')">Excluir</a>
+                </div>                
                   </div>
                 </form>
             </div>
