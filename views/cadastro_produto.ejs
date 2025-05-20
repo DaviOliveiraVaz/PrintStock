@@ -63,27 +63,26 @@
                 <form method="post" id="form">
                   <div class="input-grid">
                     <div class="input-group">
+                      <input type="text" name="codigo" id="codigo" placeholder=" " required>
                       <label for="codigo">Código</label>
-                      <input type="text" name="codigo" id="codigo" placeholder="Informe o código do produto" required>
                     </div>
                     <div class="input-group">
+                      <input type="text" name="nome" id="nome" placeholder=" " required>
                       <label for="nome">Nome</label>
-                      <input type="text" name="nome" id="nome" placeholder="Informe o nome do produto" required>
                     </div>
                     <div class="input-group">
-                      <label for="tipo">Tipo</label>
                       <select name="tipo" id="tipo" required>
-                        <option value="" disabled selected>Selecione o tipo do produto</option>
+                        <option value="" disabled selected> </option>
                         <option value="Suprimento">Suprimento</option>
                         <option value="Impressora">Impressora</option>
                         <option value="Peça">Peça</option>
                         <option value="Equipamento">Equipamento</option>
                       </select>
+                      <label for="tipo">Tipo</label>
                     </div>
                     <div class="input-group">
-                      <label for="tecnologia">Tecnologia</label>
                       <select name="tecnologia" id="tecnologia" required>
-                        <option value="" disabled selected>Selecione a tecnologia do produto</option>
+                        <option value="" disabled selected> </option>
                         <option value="Impressora Laser">Impressora Laser</option>
                         <option value="Impressora Jato">Impressora Jato</option>
                         <option value="Toner Pó">Toner</option>
@@ -93,36 +92,37 @@
                         <option value="Tinta Sublimática">Tinta Sublimática</option>
                         <option value="Outro">Outro</option>
                       </select>
+                      <label for="tecnologia">Tecnologia</label>
                     </div>
                     <div class="input-group">
-                      <label for="categoria">Categoria</label>
                       <select name="categoria" id="categoria" required>
-                        <option value="" disabled selected>Selecione a categoria do produto</option>
+                        <option value="" disabled selected> </option>
                         <option value="Original">Original</option>
                         <option value="Compatível">Compatível</option>
                         <option value="Monocromática">Monocromática</option>
                         <option value="Color">Color</option>
                         <option value="Outro">Outro</option>
                       </select>
+                      <label for="categoria">Categoria</label>
                     </div>
                     <div class="input-group">
-                      <label for="estado">Estado</label>
                       <select name="estado" id="estado" required>
-                        <option value="" disabled selected>Selecione o estado do produto</option>
+                        <option value="" disabled selected> </option>
                         <option value="Novo">Novo</option>
                         <option value="Seminovo">Seminovo</option>
                         <option value="Recarga">Recarga</option>
                         <option value="Locação">Locação</option>
                         <option value="Sucata">Sucata</option>
                       </select>
+                      <label for="estado">Estado</label>
                     </div>
                     <div class="input-group">
+                      <input type="number" name="quantidade" id="quantidade" placeholder=" " required>
                       <label for="quantidade">Quantidade</label>
-                      <input type="number" name="quantidade" id="quantidade" placeholder="Informe a quantidade do produto" required>
                     </div>
                     <div class="input-group">
+                      <input type="number" name="qtde_min" id="qtde_min" placeholder=" " required>
                       <label for="qtde_min">Estoque Mínimo</label>
-                      <input type="number" name="qtde_min" id="qtde_min" placeholder="Informe o estoque mínimo do produto" required>
                     </div>
                   </div>
                 
@@ -137,6 +137,22 @@
 </div>
   <script>
     feather.replace();
+
+    document.querySelectorAll('.input-group select').forEach(select => {
+    const parent = select.parentElement;
+    
+    const updateClass = () => {
+      if (select.value !== '') {
+        parent.classList.add('has-value');
+      } else {
+        parent.classList.remove('has-value');
+      }
+    };
+
+    // Atualiza ao carregar e ao mudar
+    updateClass();
+    select.addEventListener('change', updateClass);
+  });
   </script>
 </body>
 </html>

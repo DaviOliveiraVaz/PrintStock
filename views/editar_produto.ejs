@@ -63,17 +63,16 @@
                 <form method="post" id="form">
                   <div class="input-grid">
                     <div class="input-group">
-                        <label for="codigo">Código</label>
                         <input type="text" name="codigo" id="codigo" value="<%= Produto.codigo %>" disabled required>
+                        <label for="codigo">Código</label>
                     </div>
 
                     <div class="input-group">
-                        <label for="nome">Nome</label>
                         <input type="text" name="nome" id=  "nome" value="<%= Produto.nome %>" required>
+                        <label for="nome">Nome</label>
                     </div>
 
                     <div class="input-group">
-                      <label for="tipo">Tipo</label>
                       <select name="tipo" id="tipo" required>
                         <option disabled value="">Selecione um tipo</option>
                         <option value="Suprimento" <%= Produto.tipo === 'Suprimento' ? 'selected' : '' %>>Suprimento</option>
@@ -81,10 +80,10 @@
                         <option value="Peça" <%= Produto.tipo === 'Peça' ? 'selected' : '' %>>Peça</option>
                         <option value="Equipamento" <%= Produto.tipo === 'Equipamento' ? 'selected' : '' %>>Equipamento</option>
                       </select>
+                      <label for="tipo">Tipo</label>
                     </div>
                     
                     <div class="input-group">
-                      <label for="tecnologia">Tecnologia</label>
                       <select name="tecnologia" id="tecnologia" required>
                         <option disabled selected>Selecione uma tecnologia</option>
                         <option value="Impressora Laser" <%= Produto.tecnologia === 'Impressora Laser' ? 'selected' : '' %>>Impressora Laser</option>
@@ -96,10 +95,10 @@
                         <option value="Tinta Sublimática" <%= Produto.tecnologia === 'Tinta Sublimática' ? 'selected' : '' %>>Tinta Sublimática</option>
                         <option value="Outro" <%= Produto.tecnologia === 'Outro' ? 'selected' : '' %>>Outro</option>
                       </select>
+                      <label for="tecnologia">Tecnologia</label>
                     </div>
 
                     <div class="input-group">
-                      <label for="categoria">Categoria</label>
                       <select name="categoria" id="categoria" required>
                         <option disabled selected>Selecione uma categoria</option>
                         <option value="Original" <%= Produto.categoria === 'Original' ? 'selected' : '' %>>Original</option>
@@ -108,10 +107,10 @@
                         <option value="Color" <%= Produto.categoria === 'Color' ? 'selected' : '' %>>Color</option>
                         <option value="Outro" <%= Produto.categoria === 'Outro' ? 'selected' : '' %>>Outro</option>
                       </select>
+                      <label for="categoria">Categoria</label>
                     </div>
 
                     <div class="input-group">
-                      <label for="estado">Estado</label>
                       <select name="estado" id="estado" required>
                         <option disabled selected>Selecione um estado</option>
                         <option value="Novo" <%= Produto.estado === 'Novo' ? 'selected' : '' %>>Novo</option>
@@ -120,16 +119,17 @@
                         <option value="Locação" <%= Produto.estado === 'Locação' ? 'selected' : '' %>>Locação</option>
                         <option value="Sucata" <%= Produto.estado === 'Sucata' ? 'selected' : '' %>>Sucata</option>
                       </select>
+                      <label for="estado">Estado</label>
                     </div>
 
                     <div class="input-group">
-                        <label for="quantidade">Quantidade</label>
                         <input type="number" name="quantidade" id="quantidade" value="<%= Produto.quantidade %>" required>
+                        <label for="quantidade">Quantidade</label>
                     </div>
 
                     <div class="input-group">
-                      <label for="qtde_min">Estoque Mínimo</label>
                       <input type="number" name="qtde_min" id="qtde_min"value="<%= Produto.qtde_min %>" required>
+                      <label for="qtde_min">Estoque Mínimo</label>
                   </div>
                  </div>
 
@@ -145,6 +145,23 @@
 </div>
   <script>
     feather.replace();
+
+  document.querySelectorAll('.input-group input, .input-group select, .input-group textarea').forEach(field => {
+    const parent = field.parentElement;
+
+    const updateClass = () => {
+      if (field.value && field.value.trim() !== "") {
+        parent.classList.add('has-value');
+      } else {
+        parent.classList.remove('has-value');
+      }
+    };
+
+    updateClass(); // Aplica ao carregar
+    field.addEventListener('input', updateClass); // Para input/textarea
+    field.addEventListener('change', updateClass); // Para select
+  });
+
   </script>
 </body>
 </html>
