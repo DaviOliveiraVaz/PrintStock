@@ -66,11 +66,11 @@
             <button onclick="alterarQuantidade(-1)">-</button>
             <input type="number" id="input-qtd" value="0" oninput="atualizarQuantidadeDigitada()" style="width: 60px; text-align: center;">
             <button onclick="alterarQuantidade(1)">+</button>
-            <span id="qtd-atual">0</span>
+            <!-- <span id="qtd-atual">0</span> -->
           </div>
-          <div style="margin-top: 10px;">
+          <div id="confirm-container">
             <button id="confirm-button" onclick="confirmarAlteracao()" style="display: none;">Confirmar Alteração</button>
-          </div>          
+          </div>        
         </div>
       </div>
     <div class="content">
@@ -139,7 +139,7 @@
         <p><strong>Quantidade:</strong> ${produto.quantidade}</p>
       `;
   
-      document.getElementById('qtd-atual').innerText = alteracaoQuantidade;
+      // document.getElementById('qtd-atual').innerText = alteracaoQuantidade;
       document.getElementById('confirm-button').style.display = 'none';
       document.getElementById('modal').style.display = 'block';
     }
@@ -160,7 +160,7 @@
       input.value = -produtoAtual.quantidade;
       alteracaoQuantidade = -produtoAtual.quantidade;
     }
-    document.getElementById('qtd-atual').innerText = alteracaoQuantidade;
+    // document.getElementById('qtd-atual').innerText = alteracaoQuantidade;
     document.getElementById('confirm-button').style.display = alteracaoQuantidade !== 0 ? 'inline-block' : 'none';
   }
 }
