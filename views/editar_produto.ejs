@@ -84,8 +84,7 @@
                     </div>
                     
                     <div class="input-group">
-                      <select name="tecnologia" id="tecnologia" required>
-                        <option disabled selected>Selecione uma tecnologia</option>
+                      <select name="tecnologia" id="tecnologia" disabled required>
                         <option value="Impressora Laser" <%= Produto.tecnologia === 'Impressora Laser' ? 'selected' : '' %>>Impressora Laser</option>
                         <option value="Impressora Jato" <%= Produto.tecnologia === 'Impressora Jato' ? 'selected' : '' %>>Impressora Jato</option>
                         <option value="Toner Pó" <%= Produto.tecnologia === 'Toner Pó' ? 'selected' : '' %>>Toner</option>
@@ -99,8 +98,12 @@
                     </div>
 
                     <div class="input-group">
-                      <select name="categoria" id="categoria" required>
-                        <option disabled selected>Selecione uma categoria</option>
+                      <select name="categoria" id="categoria" disabled required>
+                        <!-- <% if (!Produto.categoria) { %>
+                        <option value="" disabled selected hidden>Selecione a categoria</option>
+                        <% } else { %>
+                        <option value="" disabled hidden>Selecione a categoria</option>
+                        <% } %> -->
                         <option value="Original" <%= Produto.categoria === 'Original' ? 'selected' : '' %>>Original</option>
                         <option value="Compatível" <%= Produto.categoria === 'Compatível' ? 'selected' : '' %>>Compatível</option>
                         <option value="Monocromática" <%= Produto.categoria === 'Monocromática' ? 'selected' : '' %>>Monocromática</option>
@@ -111,8 +114,8 @@
                     </div>
 
                     <div class="input-group">
-                      <select name="estado" id="estado" required>
-                        <option disabled selected>Selecione um estado</option>
+                      <select name="estado" id="estado" disabled required>
+                        <!-- <option value=" " <%= Produto.estado === ' ' ? 'selected' : '' %>>Selecione o estado</option> -->
                         <option value="Novo" <%= Produto.estado === 'Novo' ? 'selected' : '' %>>Novo</option>
                         <option value="Seminovo" <%= Produto.estado === 'Seminovo' ? 'selected' : '' %>>Seminovo</option>
                         <option value="Recarga" <%= Produto.estado === 'Recarga' ? 'selected' : '' %>>Recarga</option>
@@ -146,22 +149,142 @@
   <script>
     feather.replace();
 
-  document.querySelectorAll('.input-group input, .input-group select, .input-group textarea').forEach(field => {
-    const parent = field.parentElement;
+    document.querySelectorAll('.input-group input, .input-group select, .input-group textarea').forEach(field => {
+      const parent = field.parentElement;
 
-    const updateClass = () => {
-      if (field.value && field.value.trim() !== "") {
-        parent.classList.add('has-value');
+      const updateClass = () => {
+        if (field.value && field.value.trim() !== "") {
+          parent.classList.add('has-value');
+        } else {
+          parent.classList.remove('has-value');
+        }
+      };
+
+      updateClass();
+      field.addEventListener('input', updateClass);
+      field.addEventListener('change', updateClass);
+    });
+
+    const mapeamento = {
+    Suprimento: {
+      TonerPó: ["Original", "Compatível", "Novo", "Recarga", "Locação"],
+      TonerCilindro: ["Original", "Compatível", "Novo", "Recarga", "Locação"],
+      TintaCorante: ["Original", "Compatível", "Novo", "Recarga", "Locação"],
+      TintaPigmentada: ["Original", "Compatível", "Novo", "Recarga", "Locação"],
+      TintaSublimática: ["Original", "Compatível", "Novo", "Recarga", "Locação"]
+    },
+    Impressora: {
+      ImpressoraLaser: ["Monocromática", "Color", "Novo", "Seminovo", "Sucata"],
+      ImpressoraJato: ["Monocromática", "Color", "Novo", "Seminovo", "Sucata"]
+    },
+    Peça: {
+      ImpressoraLaser: ["Monocromática", "Color", "Novo", "Seminovo"],
+      ImpressoraJato: ["Monocromática", "Color", "Novo", "Seminovo"],
+      TonerPó: ["Monocromática", "Color", "Novo", "Seminovo"],
+      TonerCilindro: ["Monocromática", "Color", "Novo", "Seminovo"],
+      Outro: ["Outro", "Novo", "Seminovo"]
+    },
+    Equipamento: {
+      Outro: ["Outro", "Novo", "Seminovo", "Sucata"]
+    }
+  };
+
+    const selects = {
+    tipo: document.getElementById("tipo"),
+    tecnologia: document.getElementById("tecnologia"),
+    categoria: document.getElementById("categoria"),
+    estado: document.getElementById("estado")
+  };
+
+  const disableSelect = (select) => {
+    select.selectedIndex = 0;
+    select.disabled = true;
+  };
+
+  const enableSelect = (select) => {
+    select.disabled = false;
+  };
+
+  const resetOptions = (select, validOptions) => {
+    Array.from(select.options).forEach(opt => {
+      if (!opt.value || validOptions.includes(opt.value)) {
+        opt.hidden = false;
+        opt.disabled = false;
       } else {
-        parent.classList.remove('has-value');
+        opt.hidden = true;
+        opt.disabled = true;
       }
-    };
+    });
+    select.selectedIndex = 0;
+  };
 
-    updateClass(); // Aplica ao carregar
-    field.addEventListener('input', updateClass); // Para input/textarea
-    field.addEventListener('change', updateClass); // Para select
+  disableSelect(selects.tecnologia);
+  disableSelect(selects.categoria);
+  disableSelect(selects.estado);
+
+  selects.tipo.addEventListener("change", () => {
+    const tipo = selects.tipo.value;
+    const tecnologias = Object.keys(mapeamento[tipo] || {}).map(t => {
+      return {
+        "TonerPó": "Toner Pó",
+        "TonerCilindro": "Toner Cilindro",
+        "TintaCorante": "Tinta Corante",
+        "TintaPigmentada": "Tinta Pigmentada",
+        "TintaSublimática": "Tinta Sublimática",
+        "ImpressoraLaser": "Impressora Laser",
+        "ImpressoraJato": "Impressora Jato",
+        "Outro": "Outro"
+      }[t];
+    });
+
+    resetOptions(selects.tecnologia, tecnologias);
+    enableSelect(selects.tecnologia);
+    disableSelect(selects.categoria);
+    disableSelect(selects.estado);
   });
 
+  selects.tecnologia.addEventListener("change", () => {
+    const tipo = selects.tipo.value;
+    let tecnologia = selects.tecnologia.value;
+
+    const mapKey = {
+      "Toner Pó": "TonerPó",
+      "Toner Cilindro": "TonerCilindro",
+      "Tinta Corante": "TintaCorante",
+      "Tinta Pigmentada": "TintaPigmentada",
+      "Tinta Sublimática": "TintaSublimática",
+      "Impressora Laser": "ImpressoraLaser",
+      "Impressora Jato": "ImpressoraJato",
+      "Outro": "Outro"
+    };
+
+    const categoriaEstado = mapeamento[tipo]?.[mapKey[tecnologia]] || [];
+
+    const categorias = categoriaEstado.filter(cat => ["Original", "Compatível", "Monocromática", "Color", "Outro"].includes(cat));
+    resetOptions(selects.categoria, categorias);
+    enableSelect(selects.categoria);
+    disableSelect(selects.estado);
+  });
+
+  selects.categoria.addEventListener("change", () => {
+    const tipo = selects.tipo.value;
+    let tecnologia = selects.tecnologia.value;
+    const mapKey = {
+      "Toner Pó": "TonerPó",
+      "Toner Cilindro": "TonerCilindro",
+      "Tinta Corante": "TintaCorante",
+      "Tinta Pigmentada": "TintaPigmentada",
+      "Tinta Sublimática": "TintaSublimática",
+      "Impressora Laser": "ImpressoraLaser",
+      "Impressora Jato": "ImpressoraJato",
+      "Outro": "Outro"
+    };
+
+    const categoriaEstado = mapeamento[tipo]?.[mapKey[tecnologia]] || [];
+    const estados = categoriaEstado.filter(est => ["Novo", "Seminovo", "Recarga", "Locação", "Sucata"].includes(est));
+    resetOptions(selects.estado, estados);
+    enableSelect(selects.estado);
+  });
   </script>
 </body>
 </html>
