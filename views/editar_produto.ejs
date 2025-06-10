@@ -85,6 +85,7 @@
                     
                     <div class="input-group">
                       <select name="tecnologia" id="tecnologia" disabled required>
+                        <option value="" disabled <%= !Produto.tecnologia ? 'selected' : '' %>></option>
                         <option value="Impressora Laser" <%= Produto.tecnologia === 'Impressora Laser' ? 'selected' : '' %>>Impressora Laser</option>
                         <option value="Impressora Jato" <%= Produto.tecnologia === 'Impressora Jato' ? 'selected' : '' %>>Impressora Jato</option>
                         <option value="Toner Pó" <%= Produto.tecnologia === 'Toner Pó' ? 'selected' : '' %>>Toner</option>
@@ -99,11 +100,7 @@
 
                     <div class="input-group">
                       <select name="categoria" id="categoria" disabled required>
-                        <!-- <% if (!Produto.categoria) { %>
-                        <option value="" disabled selected hidden>Selecione a categoria</option>
-                        <% } else { %>
-                        <option value="" disabled hidden>Selecione a categoria</option>
-                        <% } %> -->
+                        <option value="" disabled <%= !Produto.categoria ? 'selected' : '' %>></option>
                         <option value="Original" <%= Produto.categoria === 'Original' ? 'selected' : '' %>>Original</option>
                         <option value="Compatível" <%= Produto.categoria === 'Compatível' ? 'selected' : '' %>>Compatível</option>
                         <option value="Monocromática" <%= Produto.categoria === 'Monocromática' ? 'selected' : '' %>>Monocromática</option>
@@ -115,7 +112,7 @@
 
                     <div class="input-group">
                       <select name="estado" id="estado" disabled required>
-                        <!-- <option value=" " <%= Produto.estado === ' ' ? 'selected' : '' %>>Selecione o estado</option> -->
+                        <option value="" disabled <%= !Produto.estado ? 'selected' : '' %>></option>
                         <option value="Novo" <%= Produto.estado === 'Novo' ? 'selected' : '' %>>Novo</option>
                         <option value="Seminovo" <%= Produto.estado === 'Seminovo' ? 'selected' : '' %>>Seminovo</option>
                         <option value="Recarga" <%= Produto.estado === 'Recarga' ? 'selected' : '' %>>Recarga</option>
@@ -147,25 +144,24 @@
     </section>
 </div>
   <script>
-    feather.replace();
+  feather.replace();
 
-    document.querySelectorAll('.input-group input, .input-group select, .input-group textarea').forEach(field => {
-      const parent = field.parentElement;
+  document.querySelectorAll('.input-group select').forEach(select => {
+    const parent = select.parentElement;
 
-      const updateClass = () => {
-        if (field.value && field.value.trim() !== "") {
-          parent.classList.add('has-value');
-        } else {
-          parent.classList.remove('has-value');
-        }
-      };
+    const updateClass = () => {
+      if (select.value !== '') {
+        parent.classList.add('has-value');
+      } else {
+        parent.classList.remove('has-value');
+      }
+    };
 
-      updateClass();
-      field.addEventListener('input', updateClass);
-      field.addEventListener('change', updateClass);
-    });
+    updateClass();
+    select.addEventListener('change', updateClass);
+  });
 
-    const mapeamento = {
+  const mapeamento = {
     Suprimento: {
       TonerPó: ["Original", "Compatível", "Novo", "Recarga", "Locação"],
       TonerCilindro: ["Original", "Compatível", "Novo", "Recarga", "Locação"],
@@ -189,7 +185,7 @@
     }
   };
 
-    const selects = {
+  const selects = {
     tipo: document.getElementById("tipo"),
     tecnologia: document.getElementById("tecnologia"),
     categoria: document.getElementById("categoria"),
@@ -197,8 +193,10 @@
   };
 
   const disableSelect = (select) => {
-    select.selectedIndex = 0;
-    select.disabled = true;
+    if (!select.value) {
+      select.selectedIndex = 0;
+      select.disabled = true;
+    }
   };
 
   const enableSelect = (select) => {
@@ -285,6 +283,7 @@
     resetOptions(selects.estado, estados);
     enableSelect(selects.estado);
   });
-  </script>
+</script>
+
 </body>
 </html>
