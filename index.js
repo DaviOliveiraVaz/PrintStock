@@ -75,7 +75,12 @@ app.post('/cadastro', async function(req, res){
     });
 
     await usuario.save();
-    res.redirect("/");
+    res.send(`
+      <script>
+        alert('Usuário cadastrado com sucesso!');
+        window.location.href = "/";
+      </script>
+    `);
   } catch (err) {
     res.send("Erro ao salvar o usuário: " + err);
   }
@@ -175,7 +180,12 @@ app.post('/cadastrar_produto', async function(req, res){
 
     await produto.save();
 
-    res.send("<script>alert('Produto cadastrado com sucesso!'); window.history.back();</script>");
+    res.send(`
+      <script>
+        alert('Produto cadastrado com sucesso!');
+        window.location.href = "/home";
+      </script>
+    `);
   } catch (err) {
     res.send("<script>alert('Erro ao salvar o produto: " + err + "'); window.history.back();</script>");
   }
@@ -211,6 +221,7 @@ app.get("/impressoras", async function (req, res) {
     }
 
     Produto.find({}).then(function (docs) {
+      docs.sort((a, b) => a.codigo - b.codigo);
       res.render("impressoras.ejs", { Produtos: docs });
     });
   } catch (error) {
@@ -228,6 +239,7 @@ app.get("/suprimentos", async function (req, res) {
     }
 
     Produto.find({}).then(function (docs) {
+      docs.sort((a, b) => a.codigo - b.codigo);
       res.render("suprimentos.ejs", { Produtos: docs });
     });
   } catch (error) {
@@ -245,6 +257,7 @@ app.get("/pecas", async function (req, res) {
     }
 
     Produto.find({}).then(function (docs) {
+      docs.sort((a, b) => a.codigo - b.codigo);
       res.render("pecas.ejs", { Produtos: docs });
     });
   } catch (error) {
@@ -262,6 +275,7 @@ app.get("/equipamentos", async function (req, res) {
     }
 
     Produto.find({}).then(function (docs) {
+      docs.sort((a, b) => a.codigo - b.codigo);
       res.render("equipamentos.ejs", { Produtos: docs });
     });
   } catch (error) {

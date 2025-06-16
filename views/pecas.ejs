@@ -20,6 +20,16 @@
                 <a class="small-logo" href="/home">PrintStock</a>
               </div>
             </div>
+
+            <div class="topbar-search">
+              <form action="/impressoras" method="get" class="search-form">
+              <input type="text" name="busca" placeholder="Buscar em Peças" class="search-input">
+              <button type="submit" class="search-button">
+                <i data-feather="search"></i>
+              </button>
+              </form>
+            </div>
+
             <div class="topbar-collapse collapse">
               <ul class="topbar-nav">
                 <li><a href="/sair" onclick="return confirm('Tem certeza que deseja sair do sistema?')">Sair</a></li>
@@ -66,7 +76,6 @@
             <button onclick="alterarQuantidade(-1)">-</button>
             <input type="number" id="input-qtd" value="0" oninput="atualizarQuantidadeDigitada()" style="width: 60px; text-align: center;">
             <button onclick="alterarQuantidade(1)">+</button>
-            <!-- <span id="qtd-atual">0</span> -->
           </div>
           <div id="confirm-container">
             <button id="confirm-button" onclick="confirmarAlteracao()" style="display: none;">Confirmar Alteração</button>
@@ -80,7 +89,7 @@
                 <tr>
                     <th>Código</th>
                     <th>Nome</th>
-                    <th>Tipo</th>
+                    <th>Estado</th>
                     <th>Quantidade</th>
                     <th>Ações</th>
                 </tr>
@@ -91,7 +100,7 @@
                       <tr>
                           <td><%= produto.codigo %></td>
                           <td><%= produto.nome %></td>
-                          <td><%= produto.tipo %></td>
+                          <td><%= produto.estado %></td>
                           <td><%= produto.quantidade %></td>
                           <td>
                             <a href="/editar-produto/<%= produto._id %>" class="btn-edit">
@@ -139,7 +148,6 @@
         <p><strong>Quantidade:</strong> ${produto.quantidade}</p>
       `;
   
-      // document.getElementById('qtd-atual').innerText = alteracaoQuantidade;
       document.getElementById('confirm-button').style.display = 'none';
       document.getElementById('modal').style.display = 'block';
     }
@@ -160,7 +168,6 @@
       input.value = -produtoAtual.quantidade;
       alteracaoQuantidade = -produtoAtual.quantidade;
     }
-    // document.getElementById('qtd-atual').innerText = alteracaoQuantidade;
     document.getElementById('confirm-button').style.display = alteracaoQuantidade !== 0 ? 'inline-block' : 'none';
   }
 }

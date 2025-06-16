@@ -1202,6 +1202,42 @@ body {
     margin: 0;
   }
 
+.search-form {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  background: white;
+  border-radius: 4px;
+  overflow: hidden;
+  height: 35px;
+}
+
+.search-input {
+  padding: 5px 10px;
+  border: none;
+  outline: none;
+  font-size: 14px;
+  height: 100%;
+}
+
+.search-button {
+  background-color: #455EB5;
+  border: none;
+  padding: 0 10px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+.search-button i {
+  color: white;
+  width: 16px;
+  height: 16px;
+}
+
   /* 
   -----------------------------------------------------------------------------------
                                    MAIN CONTENT 
