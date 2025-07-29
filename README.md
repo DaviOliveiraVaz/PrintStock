@@ -89,4 +89,4 @@ http://localhost:3000
 ## 📌 Autor
 
 Desenvolvido por **Davi de Oliveira Vaz**  
-[🔗 LinkedIn](https://www.linkedin.com/in/davi-vaz-63359b217/) • [📧 Email](davi.oliveira.vaz@gmail.com)
+[🔗 LinkedIn](https://www.linkedin.com/in/davi-vaz-63359b217/)
