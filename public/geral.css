@@ -1608,3 +1608,27 @@ body {
       max-width: 300px;
     }
   }
+
+    /* 
+  -----------------------------------------------------------------------------------
+                                   PERFIL 
+  -----------------------------------------------------------------------------------
+  */
+
+  .profile-image {
+    display: flex;
+    justify-content: center;
+  }
+
+  #profile-subtitle {
+    font-size: 40px;
+  }
+
+  #profile-image {
+    width: 150px;
+  }
+
+  .profile-data {
+    display: flex;
+    justify-content: center;
+  }

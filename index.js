@@ -116,20 +116,25 @@ app.get("/home", function (req, res) {
 }
 });
 
-app.get("/perfil", function (req, res) {
+app.get("/perfil", async function (req, res) {
   try {
-      const id_usuario = req.session.id_usuario;
+    const id_usuario = req.session.id_usuario;
 
-      if (!id_usuario) {
+    if (!id_usuario) {
+      return res.redirect("/");
+    }
+
+    Usuario.findById(id_usuario).then(function (usuario) {
+      if (!usuario) {
         return res.redirect("/");
       }
+    res.render("perfil.ejs", { usuario });
+    });
 
-      res.render("perfil.ejs", {});
-
-  }catch (error) {
+  } catch (error) {
     console.error("Erro: ", error);
-    res.status(500).send("Ocorreu um erro ao carregar a página.");
-}
+    res.status(500).send("Ocorreu um erro ao carregar o perfil.");
+  }
 });
 
 app.get("/cadastrar_produto", function (req, res) {
@@ -345,6 +350,29 @@ app.get('/deletar-produto/:id', async function(req, res) {
   } catch (error) {
     console.error("Erro ao deletar produto:", error);
     res.send("<script>alert('Erro ao deletar o produto: " + error + "'); window.history.back();</script>");
+  }
+});
+
+app.get('/deletar-usuario/:id', async function(req, res) {
+  try {
+    const id_usuario = req.session.id_usuario;
+
+    if (!id_usuario) {
+      return res.redirect("/");
+    }
+
+    await Usuario.findByIdAndDelete(req.params.id);
+
+    res.send(`
+      <script>
+        alert('Usuário deletado com sucesso!');
+        window.location.href = "/";
+      </script>
+    `);
+
+  } catch (error) {
+    console.error("Erro ao deletar o usuário:", error);
+    res.send("<script>alert('Erro ao deletar o usuário: " + error + "'); window.history.back();</script>");
   }
 });
 

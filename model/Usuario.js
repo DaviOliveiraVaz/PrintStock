@@ -6,6 +6,7 @@ const UsuarioSchema = new Schema({
   email:     { type: String, required: true },
   senha:     { type: String, required: true },
   telefone:  { type: String, required: true },
+  foto:      { type: String, required: false },
   permissao: { type: String, required: true, default: "1",},
 });
 
