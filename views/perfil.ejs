@@ -68,42 +68,81 @@
   </div>
 
   <div class="profile-data">
-    <section class="formulario">
-        <div class="box">
-            <div class="form-box">
-                <form method="post" id="form">
-                  <div class="input-grid">
-                    <div class="input-group">
-                        <input type="text" name="nome" id="nome" value="<%= usuario.nome %>" disabled required>
-                        <label for="nome">Nome</label>
-                    </div>
-                    <div class="input-group">
-                        <input type="text" name="email" id="email" value="<%= usuario.email %>" disabled required>
-                        <label for="email">E-mail</label>
-                    </div>
-                    <div class="input-group">
-                        <input type="text" name="telefone" id="telefone" value="<%= usuario.telefone %>" disabled required>
-                        <label for="telefone">Telefone</label>
-                    </div>
-                    <div class="input-group">
-                        <input type="password" name="senha" id="senha" value="<%= usuario.senha %>" disabled required>
-                        <label for="senha">Senha</label>
-                    </div>
-             
-                  </div>
-                  <div class="button-group">
-                      <button type="" class="btn-editar">Editar</button>
-                      <a href="/deletar-usuario/<%= usuario.id %>" class="btn-excluir" onclick="return confirm('Tem certeza que deseja excluir o usuário?')">Excluir</a>
-                    </div>    
-                </form>
-            </div>
+<section class="formulario">
+  <div class="box">
+    <div class="form-box">
+      <form method="post" id="form" action="/editar-usuario/<%= usuario.id %>">
+        <div class="input-grid">
+          <div class="input-group">
+            <input type="text" name="nome" class="input-form" id="nome" value="<%= usuario.nome %>" disabled required>
+            <label for="nome">Nome</label>
+          </div>
+          <div class="input-group">
+            <input type="text" name="email" class="input-form" id="email" value="<%= usuario.email %>" disabled required>
+            <label for="email">E-mail</label>
+          </div>
+          <div class="input-group">
+            <input type="text" name="telefone" class="input-form" id="telefone" value="<%= usuario.telefone %>" disabled required>
+            <label for="telefone">Telefone</label>
+          </div>
+          <div class="input-group">
+            <input type="password" name="senha" class="input-form" id="senha" value="<%= usuario.senha %>" disabled required>
+            <label for="senha">Senha</label>
+          </div>
         </div>
-    </section>
-  </div>
-</div>
 
-  <script>
-    feather.replace();
-  </script>
+        <div class="button-group">
+          <button type="submit" id="btn-salvar" class="btn-editar" style="display:none;">Salvar</button>
+          <button type="button" id="btn-cancelar" class="btn-excluir" style="display:none;">Cancelar</button>
+
+        </div>
+      </form>
+        <button id="btn-editar-externo" class="btn-editar">Editar</button>
+        <a href="/deletar-usuario/<%= usuario.id %>" id="btn-excluir" class="btn-excluir" onclick="return confirm('Tem certeza que deseja excluir o usuário?')">Excluir</a>
+    </div>
+  </div>
+</section>
+<script>
+  feather.replace();
+
+  const btnEditarExterno = document.getElementById("btn-editar-externo");
+  const btnSalvar = document.getElementById("btn-salvar");
+  const btnCancelar = document.getElementById("btn-cancelar");
+  const btnExcluir = document.getElementById("btn-excluir");
+  const inputs = document.getElementsByClassName("input-form");
+
+  const originalValues = {
+    nome: "<%= usuario.nome %>",
+    email: "<%= usuario.email %>",
+    telefone: "<%= usuario.telefone %>",
+    senha: "<%= usuario.senha %>"
+  };
+
+  btnEditarExterno.addEventListener("click", () => {
+    for (let input of inputs) input.disabled = false;
+
+    btnSalvar.style.display = "inline-block";
+    btnCancelar.style.display = "inline-block";
+
+    btnEditarExterno.style.display = "none";
+
+    btnExcluir.style.display = "none";
+  });
+
+  btnCancelar.addEventListener("click", () => {
+    for (let input of inputs) {
+      input.value = originalValues[input.name];
+      input.disabled = true;
+    }
+
+    btnSalvar.style.display = "none";
+    btnCancelar.style.display = "none";
+
+    btnEditarExterno.style.display = "inline-block";
+
+    btnExcluir.style.display = "inline-block";
+  });
+</script>
+
 </body>
 </html>

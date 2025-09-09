@@ -63,8 +63,18 @@ app.get("/cadastro", function (req, res) {
   res.render("cadastro.ejs", {});
 });
 
-app.post('/cadastro', async function(req, res){
+app.post('/cadastro', async function(req, res) {
   try {
+    const usuarioExistente = await Usuario.findOne({ email: req.body.email });
+    if (usuarioExistente) {
+      return res.send(`
+        <script>
+          alert('E-mail já cadastrado! Tente outro.');
+          window.location.href = "/cadastro";
+        </script>
+      `);
+    }
+
     const hash = await bcrypt.hash(req.body.senha, saltRounds);
 
     const usuario = new Usuario({
@@ -373,6 +383,45 @@ app.get('/deletar-usuario/:id', async function(req, res) {
   } catch (error) {
     console.error("Erro ao deletar o usuário:", error);
     res.send("<script>alert('Erro ao deletar o usuário: " + error + "'); window.history.back();</script>");
+  }
+});
+
+app.post('/editar-usuario/:id', async function(req, res) {
+  try {
+    const usuarioExistente = await Usuario.findOne({ email: req.body.email });
+    if (usuarioExistente && usuarioExistente._id.toString() !== req.params.id) {
+      return res.send(`
+        <script>
+          alert('E-mail já cadastrado! Tente outro.');
+          window.location.href = "/perfil";
+        </script>
+      `);
+    }
+
+    const usuarioAtual = await Usuario.findById(req.params.id);
+
+    let senhaAtualizada = usuarioAtual.senha;
+
+    if (req.body.senha && req.body.senha !== usuarioAtual.senha) {
+      senhaAtualizada = await bcrypt.hash(req.body.senha, saltRounds);
+    }
+
+    await Usuario.findByIdAndUpdate(req.params.id, {
+      nome: req.body.nome,
+      email: req.body.email,
+      telefone: req.body.telefone,
+      senha: senhaAtualizada
+    });
+
+    res.send(`
+      <script>
+        alert('Usuário editado com sucesso!');
+        window.location.href = "/perfil";
+      </script>
+    `);
+
+  } catch (err) {
+    res.send("<script>alert('Erro ao editar o usuário: " + err + "'); window.history.back();</script>");
   }
 });
 
