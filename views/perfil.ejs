@@ -91,15 +91,16 @@
           </div>
         </div>
 
-        <div class="button-group">
+    <div class="button-group">
           <button type="submit" id="btn-salvar" class="btn-editar" style="display:none;">Salvar</button>
           <button type="button" id="btn-cancelar" class="btn-excluir" style="display:none;">Cancelar</button>
-
         </div>
       </form>
-        <button id="btn-editar-externo" class="btn-editar">Editar</button>
-        <a href="/deletar-usuario/<%= usuario.id %>" id="btn-excluir" class="btn-excluir" onclick="return confirm('Tem certeza que deseja excluir o usuário?')">Excluir</a>
     </div>
+    <div class="button-group">
+      <button id="btn-editar-externo" class="btn-editar">Editar</button>
+      <a href="/deletar-usuario/<%= usuario.id %>" id="btn-excluir-externo" class="btn-excluir" onclick="return confirm('Tem certeza que deseja excluir o usuário?')">Excluir</a>
+  </div>
   </div>
 </section>
 <script>
@@ -108,7 +109,7 @@
   const btnEditarExterno = document.getElementById("btn-editar-externo");
   const btnSalvar = document.getElementById("btn-salvar");
   const btnCancelar = document.getElementById("btn-cancelar");
-  const btnExcluir = document.getElementById("btn-excluir");
+  const btnExcluir = document.getElementById("btn-excluir-externo");
   const inputs = document.getElementsByClassName("input-form");
 
   const originalValues = {
@@ -143,6 +144,5 @@
     btnExcluir.style.display = "inline-block";
   });
 </script>
-
 </body>
 </html>
